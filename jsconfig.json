@@ -31,6 +31,18 @@
             ],
             "~FilterButton/*": [
                 "src/components/FilterButton/*"
+            ],
+            "~Services/*": [
+                "src/Services/*"
+            ],
+            "~Authentication/*": [
+                "src/pages/Authentication/*"
+            ],
+            "~Hooks/*": [
+                "src/Hooks/*"
+            ],
+            "~routes/*": [
+                "src/routes/*"
             ]
         }
     }

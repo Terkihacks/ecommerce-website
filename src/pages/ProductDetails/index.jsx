@@ -8,7 +8,7 @@ const ProductDetails = () => {
   const { products } = useContext(ProductContext);
   const { addToCart } = useContext(CartContext);
   const product = products.find((item) => {
-    return item.id === parseInt(id);
+    return item.product_id === parseInt(id);
   });
   if (!product) {
     return (
@@ -17,7 +17,7 @@ const ProductDetails = () => {
       </section>
     );
   }
-  const { title, price, description, image } = product;
+  const { product_id, image_url, product_description, product_name, product_price  } = product;
   return (
     <section className="pt-32 pb-12 lg:py-32 flex items-center">
       <div className="container mx-auto">
@@ -28,8 +28,8 @@ const ProductDetails = () => {
                         max-w-[150px] md:max-w-[200px] lg:max-w-sm 
                         max-h-[250px] lg:max-h-sm
                         "
-              src={image}
-              alt={description}
+              src={image_url}
+              alt={product_description}
             />
           </div>
           <div className="flex-1 text-center lg:text-left">
@@ -39,15 +39,15 @@ const ProductDetails = () => {
                         font-medium  mb-4 max-w-[450px] mx-auto lg:mx-0
                         "
             >
-              {title}
+              {product_name}
             </h1>
             <div className="text-base md:text-lg lg:text-xl text-red-500 font-medium mb-6">
-              $ {price}
+              Ksh {product_price}
             </div>
-            <p className="mb-8 text-sm">{description}</p>
+            <p className="mb-8 text-sm">{product_description}</p>
             <button
               className="mb-3 bg-primary py-4 px-8 text-white text-base"
-              onClick={() => addToCart(product, product.id)}
+              onClick={() => addToCart(product, product_id)}
             >
               Add to chart
             </button>

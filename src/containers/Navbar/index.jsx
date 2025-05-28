@@ -3,7 +3,7 @@ import { SidebarContext } from "~contexts/SidebarContext";
 import { CartContext } from "~contexts/CartContext";
 import { BsBag } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import Logo from "~assets/logo.svg";
+// import Logo from "~assets/logo.svg";
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
@@ -22,14 +22,16 @@ const Navbar = () => {
     >
       <nav className="container px-[3%] mx-auto flex items-center justify-between h-full">
         <div className="flex items-center gap-3">
-          <Link to={"/"}>
-            <img className="max-w-[40px]" src={Logo} alt="" />
+            <Link to={"/"}> 
+            {/* <img className="max-w-[40px]" src={Logo} alt="" /> */}
+            <h1 className="text-2xl font-bold" >Peets Granite Solution</h1>
           </Link>
+          
         </div>
         <div
           onClick={() => setIsOpen(!isOpen)}
           className="cursor-pointer flex relative"
-        >
+        > 
           <BsBag className="text-2xl" />
           <div
             className="

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { HERO_INFO } from "~/constants";
-import ManImg from "~assets/man_hero.png";
+// import ManImg from "~assets/Hero.jpg";
 
 const Hero = () => {
   const { prev, saleTitle, underTitle, content, description } = HERO_INFO;
@@ -30,11 +30,11 @@ const Hero = () => {
           </Link>
         </div>
         <div className="hidden lg:block">
-          <img
+          {/* <img
             className="-mt-[33%] max-h-[920px] max-w-[420px] xl:max-w-none"
             src={ManImg}
-            alt="Man"
-          />
+            alt="Counter top"
+          /> */}
         </div>
       </div>
     </section>

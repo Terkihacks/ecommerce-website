@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 
 export const ProductContext = createContext();
 
@@ -6,7 +7,9 @@ const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch("https://fakestoreapi.com/products");
+      // https://fakestoreapi.com/products
+      // http://localhost:5004/products/get-products
+      const response = await fetch("http://localhost:5004/products/get-products");
       const data = await response.json();
       setProducts(data);
     };
@@ -20,4 +23,9 @@ const ProductProvider = ({ children }) => {
   );
 };
 
+ProductProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
 export default ProductProvider;
+ 

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Product</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-center mb-6">Create Product</h2>
+    
+    <form id="productForm" class="space-y-4" enctype="multipart/form-data">
+      <div>
+        <label for="product_name" class="block font-medium">Product Name</label>
+        <input type="text" id="product_name" name="product_name" required
+          class="mt-1 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-300">
+      </div>
+
+      <div>
+        <label for="product_price" class="block font-medium">Product Price ($)</label>
+        <input type="number" id="product_price" name="product_price" step="0.01" required
+          class="mt-1 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-300">
+      </div>
+
+      <div>
+        <label for="product_description" class="block font-medium">Product Description</label>
+        <textarea id="product_description" name="product_description" rows="3" required
+          class="mt-1 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-300"></textarea>
+      </div>
+
+      <div>
+        <label for="product_quantity" class="block font-medium">Quantity</label>
+        <input type="number" id="product_quantity" name="product_quantity" min="1" required
+          class="mt-1 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-300">
+      </div>
+
+      <div>
+        <label for="product_image" class="block font-medium">Product Image</label>
+        <input type="file" id="image" name="image" accept="image/*" required
+          class="mt-1 w-full text-sm text-gray-700">
+        <img id="preview" src="#" alt="Image Preview" class="mt-3 max-h-48 rounded-lg hidden">
+      </div>
+
+      <button type="submit"
+        class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition">
+        Create Product
+      </button>
+
+      <p id="message" class="text-center mt-4 text-sm font-medium"></p>
+    </form>
+  </div>
+<!-- 
+  <script>
+    const imageInput = document.getElementById('image');
+    const preview = document.getElementById('preview');
+    const form = document.getElementById('productForm');
+    const message = document.getElementById('message');
+
+    imageInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          preview.src = event.target.result;
+          preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '#';
+        preview.classList.add('hidden');
+      }
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      message.textContent = "";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("http://localhost:5004/products/create-product", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          message.textContent = "✅ Product created successfully!";
+          message.className = "text-green-600 text-center mt-4 text-sm font-medium";
+          form.reset();
+          preview.classList.add('hidden');
+        } else {
+          message.textContent = `❌ Error: ${result.message || 'Failed to create product.'}`;
+          message.className = "text-red-600 text-center mt-4 text-sm font-medium";
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        message.textContent = "❌ Network error. Please try again later.";
+        message.className = "text-red-600 text-center mt-4 text-sm font-medium";
+      }
+    });
+  </script> -->
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const imageInput = document.getElementById('image');
+    const preview = document.getElementById('preview');
+    const form = document.getElementById('productForm');
+    const message = document.getElementById('message');
+
+    imageInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          preview.src = event.target.result;
+          preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = '#';
+        preview.classList.add('hidden');
+      }
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      message.textContent = "";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("http://localhost:5004/products/create-product", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          message.textContent = "✅ Product created successfully!";
+          message.className = "text-green-600 text-center mt-4 text-sm font-medium";
+          form.reset();
+          preview.classList.add('hidden');
+        } else {
+          message.textContent = `❌ Error: ${result.message || 'Failed to create product.'}`;
+          message.className = "text-red-600 text-center mt-4 text-sm font-medium";
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        message.textContent = "❌ Network error. Please try again later.";
+        message.className = "text-red-600 text-center mt-4 text-sm font-medium";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

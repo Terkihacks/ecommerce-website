@@ -2,13 +2,16 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
 import { CartContext } from "~contexts/CartContext";
+import PropTypes from 'prop-types';
+
 
 const CartItem = ({ item }) => {
-  const { removeFromCart, increaseAmount, decreaseAmount } =
-    useContext(CartContext);
-  const { id, title, image, price, amount } = item;
-  const getFinalPrice = (price, amount) =>
-    parseFloat(price * amount).toFixed(2);
+  
+  const { removeFromCart, increaseAmount, decreaseAmount } = useContext(CartContext);
+  const { product_id, product_name, image_url, product_price, amount } = item;
+
+  const getFinalPrice = (price, amount) => parseFloat(price * amount).toFixed(2);
+
   return (
     <div
       className="
@@ -18,20 +21,20 @@ const CartItem = ({ item }) => {
                 "
     >
       <div className="w-full min-h-[150px] flex items-center gap-x-4">
-        <Link to={`/product/${id}`}>
-          <img className="max-w-[80px]" src={image} alt="" />
+        <Link to={`/product/${product_id}`}>
+          <img className="max-w-[80px]" src={image_url} alt="" />
         </Link>
         <div className="w-full flex flex-col">
           <div className="flex justify-between mb-2">
             <Link
               className="text-sm uppercase font-medium max-w-[240px] text-primary hover:underline"
-              to={`/product/${id}`}
+              to={`/product/${product_id}`}
             >
-              {title}
+              {product_name}
             </Link>
             <div
               className="text-xl cursor-pointer"
-              onClick={() => removeFromCart(id)}
+              onClick={() => removeFromCart(product_id)}
             >
               <IoMdClose className="text-gray-500 hover:text-red-500 transition" />
             </div>
@@ -45,7 +48,7 @@ const CartItem = ({ item }) => {
             >
               <div
                 className="flex-1 h-full flex justify-center items-center cursor-pointer"
-                onClick={() => decreaseAmount(id)}
+                onClick={() => decreaseAmount(product_id)}
               >
                 <IoMdRemove />
               </div>
@@ -54,16 +57,16 @@ const CartItem = ({ item }) => {
               </div>
               <div
                 className="flex-1 h-full flex justify-center items-center cursor-pointer"
-                onClick={() => increaseAmount(id)}
+                onClick={() => increaseAmount(product_id)}
               >
                 <IoMdAdd />
               </div>
             </div>
             <div className="flex-1 flex items-center justify-around">
-              $ {price}
+              Ksh {product_price}
             </div>
-            <div className="flex-1 flex justify-end items-center text-primary font-medium">{`$ ${getFinalPrice(
-              price,
+            <div className="flex-1 flex justify-end items-center text-primary font-medium">{`Ksh ${getFinalPrice(
+              product_price,
               amount
             )}`}</div>
           </div>
@@ -71,5 +74,15 @@ const CartItem = ({ item }) => {
       </div>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    product_id: PropTypes.number.isRequired,
+    product_name: PropTypes.string.isRequired,
+    image_url: PropTypes.string.isRequired,
+    product_price: PropTypes.number.isRequired,
+    amount: PropTypes.number.isRequired
+  }).isRequired
 };
 export default CartItem;

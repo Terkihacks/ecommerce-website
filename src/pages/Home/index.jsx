@@ -11,7 +11,7 @@ const Home = () => {
     setItems(products);
   }, [products]);
   const menuItems = [...new Set(products.map((item) => item.category))];
-  const filterItems = (curcat) => {
+  const filterItems = (curcat) => {1  	
     const newItems = products.filter((newItem) => {
       return newItem.category === curcat;
     });
@@ -22,7 +22,7 @@ const Home = () => {
     <div>
       <Hero />
       <section className="py-16">
-        <div className="w-full mb-4">
+        <div className="w-full mb-4"> 	
           <ProductsFilter
             setItems={setItems}
             menuItems={menuItems}
@@ -38,7 +38,7 @@ const Home = () => {
                       "
           >
             {items.map((product) => {
-              return <Product product={product} key={product.id} />;
+              return <Product key={product.product_id} product={product}  />;
             })}
           </div>
         </div>
